@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import axios from 'axios';
 import SimpleAsset from './SimpleAsset'
 import mongoose from 'mongoose';
 import { IAction, ActionType } from '../framework/IAction';
@@ -48,6 +48,10 @@ export default class ShowAssets extends Component {
           type: ActionType.create_asset,
           asset: newAsset
         }
+        // schreibe in die DB mit der route add
+        axios.post('http://localhost:8080/assets/add', newAsset)
+        .then(res => console.log(res.data));
+
         window.CS.clientAction(action);
       }
 }
